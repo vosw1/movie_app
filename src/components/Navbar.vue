@@ -17,6 +17,7 @@ export default {
     background: #000;
     padding: 20px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .navbar a{

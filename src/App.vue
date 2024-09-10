@@ -15,27 +15,32 @@
         <button v-on:click="incrementLike(i)">좋아요</button>
         <span>{{ movie.like }}</span>
         <p>
-          <button @click="openModal(movie)">상세보기</button>
+          <button @click="selectMovie(i)">상세보기</button>
         </p>
       </div>
     </div>
 
-    <Modal />
+    <!-- 자식에게 변수 값 전달하기 -->
+    <Modal 
+    :movies="movies" 
+    :isModal="isModal" 
+    :selectedMovie="selectedMovie"
+    @closeModal="isModal=false" />
    
   </div>
 </template>
 
 <script>
-import movies from './assets/movies'; // 영화 데이터
-import Navbar from './components/Navbar.vue'; // 네브바 데이터
-import Modal from './components/Modal.vue'; // 모달 데이터
+import movies from './assets/movies';
+import Navbar from './components/Navbar.vue';
+import Modal from './components/Modal.vue';
 
 export default {
   name: 'App',
   data() {
     return {
       isModal: false,
-      selectedMovie: {}, // 선택된 영화 정보를 저장할 상태 변수
+      selectedMovie: null,  // 초기화 시 null로 설정
       movies: movies
     }
   },
@@ -43,10 +48,10 @@ export default {
     incrementLike(i) {
       this.movies[i].like++;
     },
-    openModal(movie) {
-      this.selectedMovie = movie;
+    selectMovie(i) {  // 새로운 메서드 추가
+      this.selectedMovie = i;
       this.isModal = true;
-    }
+    },
   },
   components: {
     Navbar: Navbar,
