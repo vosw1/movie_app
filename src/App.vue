@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <h1>영화 정보</h1>
     <div v-for="(movie, i) in movies" :key="i" class="item">
       <figure>
@@ -19,27 +20,22 @@
       </div>
     </div>
 
-    <!-- 모달 전체 상태를 관리하도록 추가 -->
-    <div v-if="isModal" class="modal">
-      <div class="inner">
-        <button class="close-btn" @click="isModal=false">X</button>
-        <h3>영화 '{{ selectedMovie.title }}'</h3>
-        <p>{{ selectedMovie.detail }}</p>
-      </div>
-    </div>
+    <Modal />
+   
   </div>
 </template>
 
 <script>
-import movies from './assets/movies';
-console.log(movies);
+import movies from './assets/movies'; // 영화 데이터
+import Navbar from './components/Navbar.vue'; // 네브바 데이터
+import Modal from './components/Modal.vue'; // 모달 데이터
 
 export default {
   name: 'App',
   data() {
     return {
       isModal: false,
-      selectedMovie: {}, // 선택된 영화 정보를 저장할 변수
+      selectedMovie: {}, // 선택된 영화 정보를 저장할 상태 변수
       movies: movies
     }
   },
@@ -51,7 +47,11 @@ export default {
       this.selectedMovie = movie;
       this.isModal = true;
     }
-  }
+  },
+  components: {
+    Navbar: Navbar,
+    Modal: Modal
+  }  
 }
 </script>
 
@@ -95,7 +95,7 @@ button {
 
 .item img {
   width: 100%;
-  height: 250px; /* 고정된 높이 */
+  height: 260px; /* 고정된 높이 */
   object-fit: cover; /* 이미지가 박스에 맞게 조정됨 */
 }
 
