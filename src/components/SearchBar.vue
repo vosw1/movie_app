@@ -39,7 +39,7 @@ export default {
 
 <style>
 .search-box {
-    padding: 10px;
+    padding: 20px;
     display: flex;
     justify-content: center;
 }

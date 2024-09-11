@@ -1,7 +1,7 @@
 <template>
     <div class="event" :class="{show : isOpen}"> <!--기본 값-->
         <p>{{ text }}</p>
-        <button @click="isOpen=false">X</button>
+        <button @click="isOpen=false">✖︎</button>
         
     </div>
 </template>
@@ -21,11 +21,11 @@ export default {
 </script>
 <style>
 .event {
-    background: #444;
+    background: #777;
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 10px;
     text-align: center;
-    font-size: small;
+    font-size: medium;
     display: flex;
     justify-content: space-between; 
     align-items: center; 
@@ -42,5 +42,9 @@ export default {
 
 .event button {
     margin: 0;
+    border: none;
+    background: none;
+    color: white;
+    font-weight: bold
 }
 </style>
