@@ -1,13 +1,19 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar /> 
 
     <Event :text="text" />
 
+    <SearchBar :movies="movies_temp" 
+    @searchMovie="searchMovie($event)"/> <!--영화 데이터 넘겨주기-->
+
+    <p>
+      <button @click="showAllMovie">전체보기</button>
+    </p>
+
     <Movies 
-    :movies="movies" 
-    @openModal="isModal=true;
-    selectedMovie=$even"
+    :movies="movies_temp" 
+    @openModal="isModal=true; selectedMovie=$event"
     @incrementLike="incrementLike($event)" />
 
     <!-- 자식에게 변수 값 전달하기 -->
@@ -26,6 +32,7 @@ import Navbar from './components/Navbar.vue';
 import Modal from './components/Modal.vue';
 import Movies from './components/Movies.vue';
 import Event from './components/Event.vue';
+import SearchBar from './components/SearchBar.vue';
 
 export default {
   name: 'App',
@@ -33,24 +40,39 @@ export default {
     return {
       isModal: false,
       selectedMovie: null, 
-      movies: movies,
+      movies: movies, // 원본 데이터
+      movies_temp: [...movies], // 사본 데이터
       text: "Neplix 강렬한 운명의 드라마, 경기크리처"
     }
   },
   methods: {
-    incrementLike(i) {
-      this.movies[i].like++;
+    incrementLike(movieId) {
+      // movieId로 영화 찾기
+      const movie = this.movies.find(movie => movie.id === movieId);
+      if (movie) {
+        movie.like += 1;
+      }
     },
     selectMovie(i) {
       this.selectedMovie = i;
       this.isModal = true;
     },
+    searchMovie(title) {
+      // 영화 제목이 포함된 데이터
+      this.movies_temp = this.movies.filter(movie => {
+        return movie.title.includes(title);
+      })
+    },
+    showAllMovie() {
+      this.movies_temp = [...this.movies]
+    }
   },
   components: {
     Navbar: Navbar,
     Modal: Modal,
     Movies: Movies,
-    Event: Event
+    Event: Event,
+    SearchBar: SearchBar
   }  
 }
 </script>
