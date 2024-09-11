@@ -18,6 +18,7 @@ export default {
     padding: 20px;
     text-align: center;
     margin-bottom: 20px;
+    margin-top: -20px;
 }
 
 .navbar a{

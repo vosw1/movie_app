@@ -10,11 +10,10 @@
 <script>
 export default {
     name: 'ModalComponent',
-    // APP에 있는 변수를 컴포넌트에 전달
-    props: { // 변수명 : 데이터 타입
+    props: { 
         movies: Array,
         isModal: Boolean,
-        selectedMovie: Number // 데이터 변경은 부모만 가능
+        selectedMovie: Number
     }
 }
 </script>

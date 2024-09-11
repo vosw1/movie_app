@@ -1,24 +1,12 @@
 <template>
   <div>
     <Navbar />
-    <h1>영화 정보</h1>
-    <div v-for="(movie, i) in movies" :key="i" class="item">
-      <figure>
-        <img :src="movie.imgUrl" :alt="movie.title">
-      </figure>
-      <div class="info">
-        <h3 class="bg-yellow">{{ movie.title }}</h3>
-        <p>개봉: {{ movie.year }}</p>
-        <p>장르: {{ movie.category }}</p>
-        <p>상영시간: {{ movie.time }}</p>
-        <p>등급: {{ movie.rating }}</p>
-        <button v-on:click="incrementLike(i)">좋아요</button>
-        <span>{{ movie.like }}</span>
-        <p>
-          <button @click="selectMovie(i)">상세보기</button>
-        </p>
-      </div>
-    </div>
+
+    <Movies 
+    :movies="movies" 
+    @openModal="isModal=true;
+    selectedMovie=$even"
+    @incrementLike="incrementLike($event)" />
 
     <!-- 자식에게 변수 값 전달하기 -->
     <Modal 
@@ -34,28 +22,30 @@
 import movies from './assets/movies';
 import Navbar from './components/Navbar.vue';
 import Modal from './components/Modal.vue';
+import Movies from './components/Movies.vue';
 
 export default {
   name: 'App',
   data() {
     return {
       isModal: false,
-      selectedMovie: null,  // 초기화 시 null로 설정
-      movies: movies
+      selectedMovie: null, 
+      movies: movies,
     }
   },
   methods: {
     incrementLike(i) {
       this.movies[i].like++;
     },
-    selectMovie(i) {  // 새로운 메서드 추가
+    selectMovie(i) {
       this.selectedMovie = i;
       this.isModal = true;
     },
   },
   components: {
     Navbar: Navbar,
-    Modal: Modal
+    Modal: Modal,
+    Movies: Movies,
   }  
 }
 </script>
