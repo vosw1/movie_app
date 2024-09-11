@@ -1,6 +1,6 @@
 <template>
     <div class="Container">
-      <h1>영화 정보</h1>
+      <h1 class="info-title">영화 정보</h1>
       <div v-for="(movie, i) in movies" :key="i" class="item">
       <figure>
         <img :src="movie.imgUrl" :alt="movie.title">
@@ -31,5 +31,9 @@ export default {
 <style>
 .container {
   padding: 20px;
+}
+
+.info-title {
+  padding-top: 20px;
 }
 </style>

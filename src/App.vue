@@ -2,6 +2,8 @@
   <div>
     <Navbar />
 
+    <Event :text="text" />
+
     <Movies 
     :movies="movies" 
     @openModal="isModal=true;
@@ -23,6 +25,7 @@ import movies from './assets/movies';
 import Navbar from './components/Navbar.vue';
 import Modal from './components/Modal.vue';
 import Movies from './components/Movies.vue';
+import Event from './components/Event.vue';
 
 export default {
   name: 'App',
@@ -31,6 +34,7 @@ export default {
       isModal: false,
       selectedMovie: null, 
       movies: movies,
+      text: "Neplix 강렬한 운명의 드라마, 경기크리처"
     }
   },
   methods: {
@@ -46,6 +50,7 @@ export default {
     Navbar: Navbar,
     Modal: Modal,
     Movies: Movies,
+    Event: Event
   }  
 }
 </script>
